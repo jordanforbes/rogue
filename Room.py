@@ -23,8 +23,7 @@ class Room:
         self.rows = rows
         self.columns = columns
         self.createZFloor(rows, columns)
-        self.addUnit(1, (1,1))
-        self.addUnit(2,(2,2))
+        self.addUnit(1, (1,1)).addUnit(2,(1,1)).addUnit(2,(1,0)).addUnit(2,(1,1)).addUnit(2,(1,1))
         self.drawFloor()
         return self
 
@@ -35,22 +34,29 @@ class Room:
     def addUnit(self,num, coords):
         x = coords[0]
         y = coords[1]
-
         print(self.zFloor[y][x], num)
+
         # collision
         if self.zFloor[y][x] == 0.0:
             print("free")
-            self.zFloor[y][x] = num
 
         elif self.zFloor[y][x + 1] == 0.0:
             print("look right", self.zFloor[y][x+1])
-            self.zFloor[y][x + 1] = num
+            x += 1
 
         elif self.zFloor[y][x - 1] == 0.0:
             print("look left", self.zFloor[y][x-1])
+            x -= 1
 
-            self.zFloor[x][x - 1] = num
+        elif self.zFloor[y + 1][x] == 0.0:
+            print("look up", self.zFloor[y + 1][x])
+            y += 1
 
+        elif self.zFloor[y-1][x] == 0.0:
+            print("look down", self.zFloor[y-1][x])
+            y -= 1
+
+        self.zFloor[y][x] = num
         return self
 
     def drawFloor(self):
@@ -73,5 +79,12 @@ class Room:
             self.floor += " |\n"
         self.floor += f"{'___' * cols}"
         return self
+
+    def idTile(self,x,y):
+        tile = self.zfield[y][x]
+        if tile:
+            return tile
+        else:
+            return False
 
 r = Room(5, 5)

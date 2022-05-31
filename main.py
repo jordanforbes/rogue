@@ -14,35 +14,6 @@ global room
 room = Room(r(),r())
 
 
-
-
-# def drawWindow():
-#     global room
-#     field = room.floor
-#     window = Tk()
-#     window.title("main")
-#     window.configure(width=400, height=400)
-#     window.geometry("400x400")
-#
-#     title = Label(window, text="ROGUE")
-#     title.pack()
-#
-#     dungeon = Label(window, text=field)
-#     dungeon.pack()
-#
-#     new_room = Button(window, text=room.getFloor(), command=randDungeon())
-#     new_room.pack()
-#
-#     window.mainloop()
-
-# def randDungeon():
-#     global room
-#     room = Room()
-#     new_room.config()
-
-def main():
-    drawWindow()
-
 def randFloor():
     newFloor = room.newFloor(r(),r()).getFloor()
     dungeon.config(text=newFloor)
