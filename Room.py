@@ -12,19 +12,21 @@ class Room:
         self.rows = rows
         self.columns = columns
         self.zFloor = ""
-        self.createZFloor(rows, columns)
-        # print("zFloor debug")
-        # print(self.zFloor)
-
         self.floor = ""
-        # self.addUnit(1, (0, 0))
-
-        # print("zFloor one unit")
-        # self.addUnit(2, (1, 1))
-        self.addUnit(1, (1,1)).addUnit(2, (1, 1)).drawFloor()
-        # print("endprint")
-
+        self.newFloor(rows,columns)
         print(self.floor)
+
+    def getFloor(self):
+        return self.floor
+
+    def newFloor(self, rows=r(), columns=r()):
+        self.rows = rows
+        self.columns = columns
+        self.createZFloor(rows, columns)
+        self.addUnit(1, (1,1))
+        self.addUnit(2,(2,2))
+        self.drawFloor()
+        return self
 
     def createZFloor(self,rows, columns):
         self.zFloor = np.zeros((rows, columns))
@@ -67,7 +69,7 @@ class Room:
                 elif tile == 2:
                     self.floor += " # "
                 elif tile == 0:
-                    self.floor += " . "
+                    self.floor += "  .  "
             self.floor += " |\n"
         self.floor += f"{'___' * cols}"
         return self
